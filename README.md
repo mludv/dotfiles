@@ -1,2 +1,4 @@
 # Dotfiles
-To install, run install.sh
+Install stow and run:
+
+	$ stow
