@@ -1,10 +1,23 @@
+let g:mapleader = "\<Space>"
+
 " Don't try to be vi compatible
 set nocompatible
 
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
-" TODO: Load plugins here (pathogen or vundle)
+"  Load plugins here 
+call plug#begin('~/.vim/plugged')
+set rtp+=/usr/local/opt/fzf
+Plug 'junegunn/fzf.vim'
+" {{{
+  nnoremap <silent> <leader>f :Files<CR>
+  nnoremap <silent> <leader>a :Buffers<CR>
+  nnoremap <silent> <leader>A :Windows<CR>
+" }}}
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+call plug#end()
 
 " Turn on syntax highlighting
 syntax on
@@ -16,9 +29,6 @@ set noswapfile
 
 " For plugins to load correctly
 filetype plugin indent on
-
-" TODO: Pick a leader key
-" let mapleader = ","
 
 " Security
 set modelines=0
@@ -76,7 +86,7 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
-map <leader><space> :let @/=''<cr> " clear search
+" map <leader><space> :let @/=''<cr> " clear search
 
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
