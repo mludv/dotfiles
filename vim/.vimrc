@@ -6,18 +6,31 @@ set nocompatible
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
-"  Load plugins here 
+"  Load plugins here
 call plug#begin('~/.vim/plugged')
-set rtp+=/usr/local/opt/fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" {{{
+Plug 'junegunn/vim-easy-align'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'ajh17/VimCompletesMe'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'roxma/nvim-completion-manager'
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+" FZF
   nnoremap <silent> <leader>f :Files<CR>
   nnoremap <silent> <leader>a :Buffers<CR>
   nnoremap <silent> <leader>A :Windows<CR>
-" }}}
-Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-surround'
+" Whitespace
+  nnoremap <leader>c :StripWhitespace<CR>
+" Easy Align
+  xmap ga <Plug>(EasyAlign)
+  nmap ga <Plug>(EasyAlign)
 call plug#end()
+
+
 
 " Turn on syntax highlighting
 syntax on
@@ -40,7 +53,7 @@ set number
 set ruler
 
 " Blink cursor on error instead of beeping (grr)
-set visualbell
+" set visualbell
 
 " Encoding
 set encoding=utf-8
@@ -79,14 +92,14 @@ set showmode
 set showcmd
 
 " Searching
-nnoremap / /\v
-vnoremap / /\v
+"nnoremap / /\v
+"vnoremap / /\v
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 set showmatch
-" map <leader><space> :let @/=''<cr> " clear search
+map <leader><space> :let @/=''<cr> " clear search
 
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
@@ -108,8 +121,10 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 " Color scheme (terminal)
 set t_Co=256
 set background=dark
-let g:solarized_termcolors=256
+let g:solarized_termcolors=16
 let g:solarized_termtrans=1
 " put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 " in ~/.vim/colors/ and uncomment:
 colorscheme solarized
+
+
