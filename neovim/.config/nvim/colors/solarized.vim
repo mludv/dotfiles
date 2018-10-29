@@ -1,0 +1,1 @@
+/home/max/.dotfiles/vim/.vim/colors/solarized.vim

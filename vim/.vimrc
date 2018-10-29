@@ -3,6 +3,9 @@ let g:mapleader = "\<Space>"
 " Don't try to be vi compatible
 set nocompatible
 
+" Enable mouse
+set mouse=a
+
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
@@ -11,26 +14,57 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
-Plug 'ajh17/VimCompletesMe'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dadbod'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'roxma/nvim-completion-manager'
-if !has('nvim')
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
-" FZF
-  nnoremap <silent> <leader>f :Files<CR>
-  nnoremap <silent> <leader>a :Buffers<CR>
-  nnoremap <silent> <leader>A :Windows<CR>
-" Whitespace
-  nnoremap <leader>c :StripWhitespace<CR>
-" Easy Align
-  xmap ga <Plug>(EasyAlign)
-  nmap ga <Plug>(EasyAlign)
+Plug 'dbeniamine/cheat.sh-vim'
 call plug#end()
 
+" Common
+nnoremap <silent> <leader>s :vsplit<CR>
+nnoremap <silent> <leader>h :split<CR>
+nnoremap <silent> <leader>t :split<CR>:terminal<CR>:setlocal nonumber<CR>i
 
+" Windows
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+" Esc
+tnoremap <Esc> <C-\><C-n>
+
+" Fugitive
+nnoremap <silent> <leader>gs :Gstatus<CR>
+
+" FZF
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>g :GFiles<CR>
+nnoremap <silent> <leader>a :Buffers<CR>
+nnoremap <silent> <leader>A :Windows<CR>
+
+" Whitespace
+nnoremap <leader>c :StripWhitespace<CR>
+
+" Easy Align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" Command for using ripgrep and fzf to search in files
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " Turn on syntax highlighting
 syntax on
@@ -43,11 +77,15 @@ set noswapfile
 " For plugins to load correctly
 filetype plugin indent on
 
+" Split naturally
+set splitbelow
+set splitright
+
 " Security
 set modelines=0
 
 " Show line numbers
-set number
+" set number
 
 " Show file stats
 set ruler
@@ -61,11 +99,11 @@ set encoding=utf-8
 " Whitespace
 set wrap
 set textwidth=79
-set formatoptions=tcqrn1
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+set formatoptions=qrn1
+set tabstop=4
+set shiftwidth=4
+set softtabstop=0
+set noexpandtab
 set noshiftround
 
 " Cursor motion
