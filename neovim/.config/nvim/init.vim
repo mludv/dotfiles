@@ -11,6 +11,8 @@ filetype off
 
 "  Load plugins here
 call plug#begin('~/.vim/plugged')
+Plug 'altercation/vim-colors-solarized'
+Plug 'nvie/vim-flake8'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -23,6 +25,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dadbod'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'dbeniamine/cheat.sh-vim'
+Plug 'zxqfl/tabnine-vim'
+Plug 'Konfekt/FastFold' " Fast automatic folding
+Plug 'tmhedberg/SimpylFold' " Python folding
 call plug#end()
 
 " Common
@@ -96,8 +101,11 @@ set ruler
 " Encoding
 set encoding=utf-8
 
-" Whitespace
+" Linewrap
+set cc=80
 set wrap
+
+" Whitespace
 set textwidth=79
 set formatoptions=qrn1
 set tabstop=4
@@ -156,13 +164,19 @@ set listchars=tab:▸\ ,eol:¬
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
+" Python - run flake8
+autocmd FileType python map <leader>8 :call Flake8()<CR> 
+let g:flake8_show_in_gutter=0 
+let g:flake8_show_in_file=0    
+
+
 " Color scheme (terminal)
-set t_Co=256
+" set t_Co=256
 set background=dark
-let g:solarized_termcolors=16
-let g:solarized_termtrans=1
-" put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
-" in ~/.vim/colors/ and uncomment:
+" let g:solarized_termcolors=16
+" let g:solarized_termtrans=1
+" " put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+" " in ~/.vim/colors/ and uncomment:
 colorscheme solarized
 
 
