@@ -11,12 +11,13 @@ filetype off
 
 "  Load plugins here
 call plug#begin('~/.vim/plugged')
-Plug 'altercation/vim-colors-solarized'
+Plug 'icymind/NeoSolarized'
 Plug 'nvie/vim-flake8'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'  " s + two characters to jump
+Plug 'kshenoy/vim-signature'
+Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
@@ -24,10 +25,10 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dadbod'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'dbeniamine/cheat.sh-vim'
 Plug 'zxqfl/tabnine-vim'
 Plug 'Konfekt/FastFold' " Fast automatic folding
 Plug 'tmhedberg/SimpylFold' " Python folding
+Plug 'janko-m/vim-test'
 call plug#end()
 
 " Common
@@ -49,8 +50,19 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
+" Vim test mappings
+nnoremap <silent> <leader>1 :TestNearest<CR>
+nnoremap <silent> <leader>2 :TestFile<CR>
+nnoremap <silent> <leader>3 :TestSuite<CR>
+nnoremap <silent> <leader>4 :TestLast<CR>
+nnoremap <silent> <leader>5 :TestVisit<CR>
+
+let test#strategy = "neovim"
+let test#python#runner = "pytest"
+let test#python#pytest#executable = "docker exec -it django ./manage.py test -- "
+
 " Esc
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n>
 
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -90,10 +102,13 @@ set splitright
 set modelines=0
 
 " Show line numbers
-" set number
+set number
 
 " Show file stats
 set ruler
+
+" Hide python files in netrw
+let g:netrw_list_hide='.*\.pyc$,^__pycache__/$'
 
 " Blink cursor on error instead of beeping (grr)
 " set visualbell
@@ -111,7 +126,7 @@ set formatoptions=qrn1
 set tabstop=4
 set shiftwidth=4
 set softtabstop=0
-set noexpandtab
+set expandtab
 set noshiftround
 
 " Cursor motion
@@ -165,18 +180,23 @@ set listchars=tab:▸\ ,eol:¬
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
 " Python - run flake8
-autocmd FileType python map <leader>8 :call Flake8()<CR> 
-let g:flake8_show_in_gutter=0 
-let g:flake8_show_in_file=0    
+autocmd FileType python map <leader>8 :call Flake8()<CR>
+let g:flake8_show_in_gutter=0
+let g:flake8_show_in_file=0
 
 
 " Color scheme (terminal)
 " set t_Co=256
-set background=dark
+" set background=dark
 " let g:solarized_termcolors=16
 " let g:solarized_termtrans=1
 " " put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
-" " in ~/.vim/colors/ and uncomment:
-colorscheme solarized
+ " in ~/.vim/colors/ and uncomment:
+" colorscheme solarized
 
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 
+set background=dark
+colorscheme NeoSolarized

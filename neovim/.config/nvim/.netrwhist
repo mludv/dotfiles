@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/max/Code/textual/product-planner-live/generator'
+let g:netrw_dirhist_2='/Users/max/Code/textual/django-backend/app'
+let g:netrw_dirhist_3='/Users/max/Code/textual/django-backend'
+let g:netrw_dirhist_4='/Users/max/Code/textual/django-backend/app'
