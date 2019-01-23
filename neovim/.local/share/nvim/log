@@ -1,7 +1,0 @@
-2018/11/20 17:04:37 ERROR 6731 os_proc_tree_kill:104: getpgid(6787) returned -1
-2018/12/11 16:56:56 ERROR 10674 os_proc_tree_kill:104: getpgid(10711) returned -1
-2018/12/21 14:16:51 ERROR 61735 os_proc_tree_kill:104: getpgid(61740) returned -1
-2019/01/02 14:37:45 ERROR 25761 os_proc_tree_kill:104: getpgid(25766) returned -1
-2019/01/08 12:48:12 ERROR 99623 os_proc_tree_kill:104: getpgid(1286) returned -1
-2019/01/10 09:59:15 ERROR 27939 os_proc_tree_kill:104: getpgid(28877) returned -1
-2019/01/15 10:26:35 ERROR 77672 os_proc_tree_kill:104: getpgid(78691) returned -1
