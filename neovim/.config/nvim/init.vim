@@ -29,6 +29,8 @@ Plug 'zxqfl/tabnine-vim'
 Plug 'Konfekt/FastFold' " Fast automatic folding
 Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'janko-m/vim-test'
+Plug 'kassio/neoterm'  " Open same terminal
+Plug 'benmills/vimux'  " VimuxRunCommand
 call plug#end()
 
 " Common
@@ -56,13 +58,34 @@ nnoremap <silent> <leader>2 :TestFile<CR>
 nnoremap <silent> <leader>3 :TestSuite<CR>
 nnoremap <silent> <leader>4 :TestLast<CR>
 nnoremap <silent> <leader>5 :TestVisit<CR>
-
-let test#strategy = "neovim"
+let test#strategy = "vimux"
 let test#python#runner = "pytest"
-let test#python#pytest#executable = "docker exec -it django ./manage.py test -- "
+let test#python#pytest#executable = "docker exec -it django ./manage.py test -- --reuse-db"
 
-" Esc
-" tnoremap <Esc> <C-\><C-n>
+
+" Vimux
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+" Inspect runner pane
+map <Leader>vi :VimuxInspectRunner<CR>
+" Close vim tmux runner opened by VimuxRunCommand
+map <Leader>vq :VimuxCloseRunner<CR>
+" Interrupt any command running in the runner pane
+map <Leader>vx :VimuxInterruptRunner<CR>
+" Open IPython
+map <leader>ip :VimuxRunCommand "docker exec -it django ./manage.py shell_plus"<CR>
+" Send text to REPL
+function! VimuxSlime()
+ call VimuxSendText(@v)
+ call VimuxSendKeys("Enter")
+endfunction
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <Leader>vs "vy :call VimuxSlime()<CR>
+
+" Esc in terminal
+tnoremap <Esc> <C-\><C-n>
 
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
