@@ -98,6 +98,30 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "tmux change window with fn + hjkl",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "a", "modifiers": "control"
+                                    },
+                                    {
+                                        "key_code": "left"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
