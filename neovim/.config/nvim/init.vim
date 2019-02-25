@@ -16,19 +16,19 @@ Plug 'nvie/vim-flake8'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'  " s + two characters to jump
-Plug 'kshenoy/vim-signature'
-Plug 'vimwiki/vimwiki'
+Plug 'kshenoy/vim-signature'  " better marks support
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-dadbod'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'zxqfl/tabnine-vim'
 Plug 'Konfekt/FastFold' " Fast automatic folding
 Plug 'tmhedberg/SimpylFold' " Python folding
-Plug 'janko-m/vim-test'
+Plug 'pangloss/vim-javascript'  " JS folding
+Plug 'mxw/vim-jsx'
+Plug 'janko-m/vim-test'  " test runner
 Plug 'kassio/neoterm'  " Open same terminal
 Plug 'benmills/vimux'  " VimuxRunCommand
 call plug#end()
@@ -92,12 +92,17 @@ nnoremap <silent> <leader>gs :Gstatus<CR>
 
 " FZF
 nnoremap <silent> <leader>f :Files<CR>
-nnoremap <silent> <leader>g :GFiles<CR>
 nnoremap <silent> <leader>a :Buffers<CR>
+nnoremap <silent> <leader>j :Lines<CR>
 nnoremap <silent> <leader>A :Windows<CR>
 
 " Whitespace
 nnoremap <leader>c :StripWhitespace<CR>
+
+" Folding
+set foldmethod=syntax
+set foldlevelstart=0
+let javaScript_fold=1         " JavaScript
 
 " Easy Align
 xmap ga <Plug>(EasyAlign)
@@ -109,8 +114,8 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 " Turn on syntax highlighting
 syntax on
 
-" Tags
-set tags=./.tags;
+" Remove YCM preview window
+set completeopt-=preview
 
 " Turn off backup files
 set nobackup
