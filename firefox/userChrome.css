@@ -2,14 +2,30 @@
  /* Hide tab bar in FF Quantum */
   @-moz-document url("chrome://browser/content/browser.xul") {
     #TabsToolbar {
-      visibility: collapse !important;
-      margin-bottom: 21px !important;
+      visibility: collapse;
+    }
+
+    /* Position window controls */
+    .titlebar-buttonbox-container {
+      position: absolute;
+      visibility: visible;
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+
+    /*
+     * Make room for window controls and a bit of extra space for window drag/move.
+     * Only apply this style when not in fullscreen mode.
+     */
+    #main-window:not([inFullscreen]) #nav-bar{
+      padding: 0px 5px 0px 105px !important;
     }
 
     #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
-      visibility: collapse !important;
+      display: none;
     }
-    #nav-bar {
-      padding-left: 70px !important;
+
+    #sidebar {
+      min-width: 100px !important;
     }
  }
