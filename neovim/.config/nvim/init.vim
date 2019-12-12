@@ -11,27 +11,35 @@ filetype off
 
 "  Load plugins here
 call plug#begin('~/.vim/plugged')
-Plug 'icymind/NeoSolarized'
+Plug 'altercation/vim-colors-solarized'
 Plug 'nvie/vim-flake8'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'rizzatti/dash.vim'  " Open dash with :dash
 Plug 'justinmk/vim-sneak'  " s + two characters to jump
-Plug 'kshenoy/vim-signature'  " better marks support
+" Plug 'kshenoy/vim-signature'  " better marks support
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-vinegar'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'zxqfl/tabnine-vim'
 Plug 'Konfekt/FastFold' " Fast automatic folding
 Plug 'tmhedberg/SimpylFold' " Python folding
+Plug 'vim-python/python-syntax'
 Plug 'pangloss/vim-javascript'  " JS folding
+Plug 'HerringtonDarkholme/yats.vim'  " Typescript syntax
+Plug 'mcmire/vim-grakn'  " Grakn syntax
 Plug 'mxw/vim-jsx'
 Plug 'janko-m/vim-test'  " test runner
 Plug 'kassio/neoterm'  " Open same terminal
 Plug 'benmills/vimux'  " VimuxRunCommand
+Plug 'gdetrez/vim-gf'
 call plug#end()
+
+let g:python_highlight_all = 1
 
 " Common
 nnoremap <silent> <leader>s :vsplit<CR>
@@ -58,12 +66,15 @@ nnoremap <silent> <leader>2 :TestFile<CR>
 nnoremap <silent> <leader>3 :TestSuite<CR>
 nnoremap <silent> <leader>4 :TestLast<CR>
 nnoremap <silent> <leader>5 :TestVisit<CR>
-let test#strategy = "vimux"
+" let test#strategy = "vimux"
+let test#strategy = "neoterm"
 let test#python#runner = "pytest"
-let test#python#pytest#executable = "docker exec -it django ./manage.py test -- --reuse-db"
+let test#python#pytest#executable = "docker exec -it django ./manage.py test -- --reuse-db -v"
+" let test#python#pytest#executable = "./manage.py test -- --reuse-db -v"
 
 
 " Vimux
+map <leader>r :call VimuxRunCommand("clear; python " . bufname("%"))<CR>
 " Prompt for a command to run
 map <Leader>vp :VimuxPromptCommand<CR>
 " Run last command executed by VimuxRunCommand
@@ -114,6 +125,9 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 " Turn on syntax highlighting
 syntax on
 
+" Use <leader>w to toggle whitespace highlighting
+nnoremap <silent> <leader>w :ToggleWhitespace<CR>
+
 " Remove YCM preview window
 set completeopt-=preview
 
@@ -133,7 +147,7 @@ set splitright
 set modelines=0
 
 " Show line numbers
-set number
+set nonumber
 
 " Show file stats
 set ruler
@@ -193,13 +207,6 @@ set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
-" Remap help key.
-inoremap <F1> <ESC>:set invfullscreen<CR>a
-nnoremap <F1> :set invfullscreen<CR>
-vnoremap <F1> :set invfullscreen<CR>
-
-" Textmate holdouts
-
 " Formatting
 map <leader>q gqip
 
@@ -215,19 +222,22 @@ autocmd FileType python map <leader>8 :call Flake8()<CR>
 let g:flake8_show_in_gutter=0
 let g:flake8_show_in_file=0
 
+" Scss -> use css folding
+autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
 
-" Color scheme (terminal)
-" set t_Co=256
-" set background=dark
-" let g:solarized_termcolors=16
-" let g:solarized_termtrans=1
-" " put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
- " in ~/.vim/colors/ and uncomment:
-" colorscheme solarized
+" let g:nord_bold = 0
 
-let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
+" augroup nord-theme-overrides
+"   autocmd!
 
+"   autocmd ColorScheme nord highlight! link djangoTagBlock Tag
+"   autocmd ColorScheme nord highlight! link djangoVarBlock Tag
+"   autocmd ColorScheme nord highlight! link djangoStatement Character
+"   autocmd ColorScheme nord highlight! Folded ctermfg=12 ctermbg=0 guibg=#2e3440
+" augroup END
+
+" colorscheme nord
+"
 set background=dark
-colorscheme NeoSolarized
+colorscheme solarized
+highlight! VertSplit ctermbg=NONE guibg=NONE
