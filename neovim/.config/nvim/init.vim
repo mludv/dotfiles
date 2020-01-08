@@ -37,9 +37,14 @@ Plug 'janko-m/vim-test'  " test runner
 Plug 'kassio/neoterm'  " Open same terminal
 Plug 'benmills/vimux'  " VimuxRunCommand
 Plug 'gdetrez/vim-gf'
+Plug 'psf/black'  " use `:Black` to run black formatter
 call plug#end()
 
 let g:python_highlight_all = 1
+
+" Black
+nnoremap <leader>b :Black<CR>
+" autocmd BufWritePre *.py execute ':Black'
 
 " Common
 nnoremap <silent> <leader>s :vsplit<CR>
@@ -107,6 +112,10 @@ nnoremap <silent> <leader>a :Buffers<CR>
 nnoremap <silent> <leader>j :Lines<CR>
 nnoremap <silent> <leader>A :Windows<CR>
 
+" FZF custom search (modify dir for current alternative path)
+command! -bang LibFiles call fzf#vim#files('~/.venvs/chatbot-socket/lib/python3.6/site-packages', <bang>0)
+nnoremap <silent> <leader>v :LibFiles<CR>
+
 " Whitespace
 nnoremap <leader>c :StripWhitespace<CR>
 
@@ -162,7 +171,7 @@ let g:netrw_list_hide='.*\.pyc$,^__pycache__/$'
 set encoding=utf-8
 
 " Linewrap
-set cc=80
+set cc=88
 set wrap
 
 " Whitespace

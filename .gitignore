@@ -3,3 +3,5 @@ vim/.vim/plugged/*
 neovim/.local/share/nvim/shada/*
 neovim/.config/nvim/.netrwhist
 neovim/.local/share/nvim/log
+neovim/.local/share/nvim/black
+neovim/.config/configstore
