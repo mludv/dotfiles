@@ -5,8 +5,8 @@ if not functions -q fisher
 end
 
 # Google SDK
-bass source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-bass source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+# bass source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+# bass source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
 
 # Variables
 export FZF_DEFAULT_COMMAND='fd --type f'
@@ -16,6 +16,8 @@ set -g fish_user_paths "/usr/local/opt/python/libexec/bin" $fish_user_paths
 set -g fish_user_paths "/Library/Developer/Toolchains/swift-latest/usr/bin" $fish_user_paths
 
 set -g fish_user_paths "$HOME/.cabal/bin" "$HOME/.ghcup/bin" $fish_user_paths
+set -g fish_user_paths "/miniconda3/bin" $fish_user_paths
+set -g fish_user_paths "/Users/max/.netlify/helper/bin" $fish_user_paths
 
 set -x LC_ALL 'en_US.utf-8'
 set -x LANG 'en_US.utf-8'
@@ -34,3 +36,6 @@ alias gl "git log --oneline"
 
 # Rust
 source $HOME/.cargo/env
+
+# Conda
+source /miniconda3/etc/fish/conf.d/conda.fish
