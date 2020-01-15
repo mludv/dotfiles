@@ -3,6 +3,7 @@ let g:mapleader = "\<Space>"
 " Don't try to be vi compatible
 set nocompatible
 
+
 " Enable mouse
 set mouse=a
 
@@ -30,10 +31,13 @@ Plug 'pangloss/vim-javascript'  " JS folding
 Plug 'HerringtonDarkholme/yats.vim'  " Typescript syntax
 Plug 'mxw/vim-jsx'
 Plug 'janko-m/vim-test'  " test runner
-Plug 'kassio/neoterm'  " Open same terminal
+Plug '5long/pytest-vim-compiler'
+Plug 'tpope/vim-dispatch'
 call plug#end()
 
 let g:python_highlight_all = 1
+let g:dispatch_compilers = {
+    \ 'pytest': 'pytest'}
 
 " For plugins to load correctly
 filetype plugin indent on
@@ -67,8 +71,7 @@ nnoremap <silent> <leader>2 :TestFile<CR>
 nnoremap <silent> <leader>3 :TestSuite<CR>
 nnoremap <silent> <leader>4 :TestLast<CR>
 nnoremap <silent> <leader>5 :TestVisit<CR>
-" let test#strategy = "vimux"
-let test#strategy = "neoterm"
+let test#strategy = "dispatch"
 let test#python#runner = "pytest"
 
 " Esc in terminal
