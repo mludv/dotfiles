@@ -12,7 +12,8 @@ filetype off
 
 "  Load plugins here
 call plug#begin('~/.vim/plugged')
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'nvie/vim-flake8'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -70,7 +71,7 @@ nnoremap <silent> <leader>1 :TestNearest<CR>
 nnoremap <silent> <leader>2 :TestFile<CR>
 nnoremap <silent> <leader>3 :TestSuite<CR>
 nnoremap <silent> <leader>4 :TestLast<CR>
-nnoremap <silent> <leader>5 :TestVisit<CR>
+nnoremap <silent> <leader>5 :TestLast --pdb -strategy=basic<CR>
 let test#strategy = "dispatch"
 let test#python#runner = "pytest"
 
@@ -202,6 +203,9 @@ let g:flake8_show_in_file=0
 " Scss -> use css folding
 autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
 
-set background=dark
-colorscheme solarized
+" set background=dark
+if has("termguicolors")
+    set termguicolors
+endif
+colorscheme solarized8
 highlight! VertSplit ctermbg=NONE guibg=NONE
