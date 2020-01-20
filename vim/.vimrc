@@ -5,9 +5,12 @@ filetype off " helps force plugins to load correctly when it's turned back on
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
+
+    set termguicolors
     set background=dark
-    colorscheme solarized
+    colorscheme solarized8
+    highlight! VertSplit ctermbg=NONE guibg=NONE
 call plug#end()
 
 syntax enable
