@@ -12,9 +12,6 @@ end
 export FZF_DEFAULT_COMMAND='fd --type f'
 set -g EDITOR nvim
 set -g fish_user_paths "/Users/max/.local/bin" $fish_user_paths
-set -g fish_user_paths "/usr/local/opt/python/libexec/bin" $fish_user_paths
-
-set -g fish_user_paths "/miniconda3/bin" $fish_user_paths
 set -g fish_user_paths "/Users/max/.netlify/helper/bin" $fish_user_paths
 
 set -x LC_ALL 'en_US.utf-8'
@@ -24,8 +21,7 @@ set -x LANG 'en_US.utf-8'
 alias gl "git log --oneline"
 
 # Rust
-# source $HOME/.cargo/env
+source $HOME/.cargo/env
 
-# Conda
-source /miniconda3/etc/fish/conf.d/conda.fish
-source /Users/max/.cargo/env
+# Pyenv
+status --is-interactive; and pyenv init --no-rehash - | source

@@ -3,13 +3,12 @@ set nocompatible " don't try to emulate vi
 set mouse=a
 filetype off " helps force plugins to load correctly when it's turned back on
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/plugged-vim')
 
 Plug 'lifepillar/vim-solarized8'
-
     set termguicolors
     set background=dark
-    colorscheme solarized8
+    colorscheme solarized
     highlight! VertSplit ctermbg=NONE guibg=NONE
 call plug#end()
 

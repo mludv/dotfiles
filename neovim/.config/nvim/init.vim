@@ -17,12 +17,13 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'nvie/vim-flake8'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-vinegar'  " Extends netrw
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'zxqfl/tabnine-vim'
 Plug 'Konfekt/FastFold' " Fast automatic folding
@@ -30,12 +31,14 @@ Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'vim-python/python-syntax'
 Plug 'pangloss/vim-javascript'  " JS folding
 Plug 'HerringtonDarkholme/yats.vim'  " Typescript syntax
-Plug 'mxw/vim-jsx'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'janko-m/vim-test'  " test runner
 Plug '5long/pytest-vim-compiler'
 Plug 'tpope/vim-dispatch'
 call plug#end()
 
+let g:python_host_prog = '/Users/max/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/max/.pyenv/versions/neovim3/bin/python'
 let g:python_highlight_all = 1
 let g:dispatch_compilers = {
     \ 'pytest': 'pytest'}
@@ -45,26 +48,12 @@ filetype plugin indent on
 
 " Tags
 command! MakePyTags !ctags -R --python-kinds=-i --languages=Python .
-command! AddToPyTags !ctags -aR --python-kinds=-i $VIRTUAL_ENV/lib/python*/site-packages/<cword><cr>
+command! AddToPyTags !ctags -aR --python-kinds=-i (pyenv prefix)/lib/python*/site-packages/<cword><cr>
 
 " Common
 nnoremap <silent> <leader>s :vsplit<CR>
 nnoremap <silent> <leader>h :split<CR>
 nnoremap <silent> <leader>t :split<CR>:terminal<CR>:setlocal nonumber<CR>i
-
-" Windows
-tnoremap <C-h> <C-\><C-N><C-w>h
-tnoremap <C-j> <C-\><C-N><C-w>j
-tnoremap <C-k> <C-\><C-N><C-w>k
-tnoremap <C-l> <C-\><C-N><C-w>l
-inoremap <C-h> <C-\><C-N><C-w>h
-inoremap <C-j> <C-\><C-N><C-w>j
-inoremap <C-k> <C-\><C-N><C-w>k
-inoremap <C-l> <C-\><C-N><C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 
 " Vim test mappings
 nnoremap <silent> <leader>1 :TestNearest<CR>
@@ -91,7 +80,7 @@ nnoremap <silent> <leader>A :Windows<CR>
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " FZF custom search (modify dir for current alternative path)
-command! -bang LibFiles call fzf#vim#files($VIRTUAL_ENV . "/lib/python3.7/site-packages", <bang>0)
+command! -bang LibFiles call fzf#vim#files($VIRTUAL_ENV . "/lib/python3.6/site-packages", <bang>0)
 nnoremap <silent> <leader>v :LibFiles<CR>
 
 " Whitespace
@@ -140,7 +129,7 @@ let g:netrw_list_hide='.*\.pyc$,^__pycache__/$'
 set encoding=utf-8
 
 " Linewrap
-set cc=88
+set cc=80
 set wrap
 
 " Whitespace
@@ -203,9 +192,15 @@ let g:flake8_show_in_file=0
 " Scss -> use css folding
 autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
 
+" Yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 " set background=dark
 if has("termguicolors")
     set termguicolors
 endif
 colorscheme solarized8
 highlight! VertSplit ctermbg=NONE guibg=NONE
+
+" SNIPPETS
+nnoremap <leader>,html :-1read $HOME/.vim/.skeleton.html<cr>3jwf>a

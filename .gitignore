@@ -1,5 +1,6 @@
 vim/.vim/.netrwhist
 vim/.vim/plugged/*
+vim/.vim/plugged-vim/*
 neovim/.local/share/nvim/shada/*
 neovim/.config/nvim/.netrwhist
 neovim/.local/share/nvim/log
