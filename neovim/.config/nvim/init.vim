@@ -14,28 +14,33 @@ filetype off
 call plug#begin('~/.vim/plugged')
 Plug 'lifepillar/vim-solarized8'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'nvie/vim-flake8'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-vinegar'  " Extends netrw
+Plug 'tpope/vim-vinegar'            " Extends netrw
+Plug 'tpope/vim-dispatch'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/gv.vim'
+Plug 'vim-scripts/ReplaceWithRegister' " `gr` to replace from register
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'zxqfl/tabnine-vim'
-Plug 'Konfekt/FastFold' " Fast automatic folding
-Plug 'tmhedberg/SimpylFold' " Python folding
-Plug 'vim-python/python-syntax'
-Plug 'pangloss/vim-javascript'  " JS folding
-Plug 'HerringtonDarkholme/yats.vim'  " Typescript syntax
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'janko-m/vim-test'  " test runner
-Plug '5long/pytest-vim-compiler'
-Plug 'tpope/vim-dispatch'
+Plug 'Konfekt/FastFold'             " Fast automatic folding
+Plug 'tmhedberg/SimpylFold'         " Python folding
+Plug 'vim-python/python-syntax'     " Better Python syntax
+Plug 'pangloss/vim-javascript'      " JS folding
+Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax
+Plug 'MaxMEllon/vim-jsx-pretty'     " JSX
+Plug 'janko-m/vim-test'             " test runner
+Plug 'mattn/emmet-vim'              " 
+" Plug '5long/pytest-vim-compiler'
 call plug#end()
+
+" let g:user_emmet_leader_key = ','
 
 let g:python_host_prog = '/Users/max/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/Users/max/.pyenv/versions/neovim3/bin/python'
@@ -75,6 +80,10 @@ nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>a :Buffers<CR>
 nnoremap <silent> <leader>j :Lines<CR>
 nnoremap <silent> <leader>A :Windows<CR>
+
+" Use preview window for files
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " Command for using ripgrep and fzf to search in files
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
