@@ -9,7 +9,10 @@ end
 # bass source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
 
 # Variables
-export FZF_DEFAULT_COMMAND='fd --type f'
+set -x FZF_DEFAULT_COMMAND 'fd --type f'
+set -x FZF_CTRL_T_COMMAND 'fd --type f --type d'
+set -x FZF_CTRL_T_OPTS "--preview 'begin; bat --decorations never --color always {} 2> /dev/null; or exa --git-ignore --color always -T {}; end | head -200'"
+
 set -g EDITOR nvim
 set -g fish_user_paths "/Users/max/.local/bin" $fish_user_paths
 set -g fish_user_paths "/Users/max/.netlify/helper/bin" $fish_user_paths
