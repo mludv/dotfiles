@@ -3,7 +3,6 @@ let g:mapleader = "\<Space>"
 " Don't try to be vi compatible
 set nocompatible
 
-
 " Enable mouse
 set mouse=a
 
@@ -24,11 +23,14 @@ Plug 'tpope/vim-dispatch'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-peekaboo'
+" Plug 'junegunn/vim-peekaboo' " Shows registers in sidebar
 Plug 'junegunn/gv.vim'
 Plug 'vim-scripts/ReplaceWithRegister' " `gr` to replace from register
 Plug 'ntpeters/vim-better-whitespace'
+
 Plug 'zxqfl/tabnine-vim'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 Plug 'Konfekt/FastFold'             " Fast automatic folding
 Plug 'tmhedberg/SimpylFold'         " Python folding
 Plug 'vim-python/python-syntax'     " Better Python syntax
@@ -36,8 +38,6 @@ Plug 'pangloss/vim-javascript'      " JS folding
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax
 Plug 'MaxMEllon/vim-jsx-pretty'     " JSX
 Plug 'janko-m/vim-test'             " test runner
-Plug 'mattn/emmet-vim'              " 
-" Plug '5long/pytest-vim-compiler'
 call plug#end()
 
 " let g:user_emmet_leader_key = ','
@@ -80,10 +80,6 @@ nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>a :Buffers<CR>
 nnoremap <silent> <leader>j :Lines<CR>
 nnoremap <silent> <leader>A :Windows<CR>
-
-" Use preview window for files
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " Command for using ripgrep and fzf to search in files
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
@@ -213,3 +209,20 @@ highlight! VertSplit ctermbg=NONE guibg=NONE
 
 " SNIPPETS
 nnoremap <leader>,html :-1read $HOME/.vim/.skeleton.html<cr>3jwf>a
+
+" Zip Right
+"
+" Moves the character under the cursor to the end of the line.  Handy when you
+" have something like:
+"
+"     foo
+"
+" And you want to wrap it in a method call, so you type:
+"
+"     println()foo
+"
+" Once you hit escape your cursor is on the closing paren, so you can 'zip' it
+" over to the right with this mapping.
+"
+" This should preserve your last yank/delete as well.
+nnoremap zl :let @z=@"<cr>x$p:let @"=@z<cr>
