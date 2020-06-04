@@ -17,6 +17,8 @@ set -g EDITOR nvim
 set -g fish_user_paths "/Users/max/.local/bin" $fish_user_paths
 set -g fish_user_paths "/Users/max/.netlify/helper/bin" $fish_user_paths
 set -g fish_user_paths "/Users/max/.cargo/bin" $fish_user_paths
+set -x CLOUDSDK_PYTHON /Users/max/.pyenv/versions/2.7.*/bin/python
+
 
 set -x LC_ALL 'en_US.utf-8'
 set -x LANG 'en_US.utf-8'
@@ -31,7 +33,7 @@ set -g fish_user_paths "/usr/local/opt/gettext/bin" $fish_user_paths
 # Pyenv
 set -gx PATH $PATH[1..-6] '/Users/max/.pyenv/shims' $PATH[-5..-1]
 set -gx PYENV_SHELL fish
-source '/usr/local/Cellar/pyenv/1.2.16/libexec/../completions/pyenv.fish'
+source "/usr/local/Cellar/pyenv/1.2.18/completions/pyenv.fish"
 function pyenv
   set command $argv[1]
   set -e argv[1]
